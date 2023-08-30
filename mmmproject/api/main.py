@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import pandas as pd
-from mmmproject.api.df_model import *
+from mmmproject.model.df_model import *
 import json
 
 app = FastAPI()
@@ -42,15 +42,8 @@ def query_sale_predict(Day):
     dd
     Return sales data from "simple_df" of given input Day.
     """
-    sales_result = pd.DataFrame(simple_df) #.iloc[[Day]]
-    return sales_result
-    # def parse_csv(sales_result):
-    #     res = sales_result.to_json(orient="records")
-    #     parsed = json.loads(res)
-    # return parsed
-
-    # model = load_model()
-    # assert model is not None
+    pipeline_loaded = pickle.load(open('../pipelines/pipeline-2023-08-30 16:08:45.140758.pkl', 'rb'))
+    return pipeline_loaded.score(X, y)
 
 # @app.get("/predict")
 # def predict(
