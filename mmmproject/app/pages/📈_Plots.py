@@ -2,10 +2,9 @@ import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
+from mmmproject.app.streamlit_app import data
 
 st.sidebar.markdown("# 📈 Plots")
-
-data=pd.read_csv('df.csv')
 
 #Plots
 st.subheader('Visualisations', divider='rainbow')

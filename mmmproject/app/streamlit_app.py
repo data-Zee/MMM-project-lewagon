@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 import os
 
-#data = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df.py"
+
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df.csv")
+data=pd.read_csv(path)
 
 st.title("Marketing Mix Model")
 
