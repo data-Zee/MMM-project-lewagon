@@ -2,7 +2,10 @@ import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
-from mmmproject.app.streamlit_app import data
+import os
+
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df.csv")
+data=pd.read_csv(path)
 
 st.sidebar.markdown("# 📈 Plots")
 
