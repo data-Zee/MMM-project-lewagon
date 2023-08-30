@@ -4,14 +4,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 
+#DATA
 path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df.csv")
 data=pd.read_csv(path)
 
-st.sidebar.markdown("# 📈 Plots")
-
-#Plots
-st.subheader('Visualisations', divider='rainbow')
-
+st.subheader('Facebook Visualisations', divider='rainbow')
+st.sidebar.markdown("# Facebook")
+tab1, tab2 = st.tabs(["plot1", "plot2"])
 
 #FIRST PLOT
 # Set the style for the plot (optional)
@@ -28,7 +27,9 @@ plt.ylabel('Total Sales')
 # Show legend
 plt.legend()
 # Show the plot
-st.pyplot(fig1)
+with tab1:
+   st.header("plot1")
+   st.pyplot(fig1)
 
 
 #SECOND PLOT
@@ -46,22 +47,6 @@ plt.ylabel('Total Sales')
 # Show legend
 plt.legend()
 # Show the plot
-st.pyplot(fig2)
-
-
-#THIRD PLOT
-# Set the style for the plot (optional)
-sns.set(style="whitegrid")
-# Create the scatter plot using Seaborn
-fig3=plt.figure(figsize=(10, 6))
-sns.scatterplot(x='tt_costs', y='total_sales', data=data, label='TikTok', color='blue')
-sns.scatterplot(x='fb_costs', y='total_sales', data=data, label='Facebook', color='green')
-sns.scatterplot(x='google_costs', y='total_sales', data=data, label='Google', color='orange')
-# Set plot title and labels
-plt.title('Costs vs. Total Sales')
-plt.xlabel('Costs')
-plt.ylabel('Total Sales')
-# Show legend
-plt.legend()
-# Show the plot
-st.pyplot(fig3)
+with tab2:
+   st.header("plot2")
+   st.pyplot(fig2)
