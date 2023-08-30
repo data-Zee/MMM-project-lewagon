@@ -5,7 +5,7 @@ import pandas as pd
 
 st.sidebar.markdown("# 📈 Plots")
 
-data=pd.read_csv('../raw_data/df.csv')
+data=pd.read_csv('df.csv')
 
 #Plots
 st.subheader('Visualisations', divider='rainbow')

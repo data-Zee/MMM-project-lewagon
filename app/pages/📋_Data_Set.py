@@ -5,5 +5,6 @@ st.sidebar.markdown("# 📋 Data Set")
 
 #DataFrame
 st.subheader('Data Set', divider='rainbow')
-data=pd.read_csv('../raw_data/df.csv')
+
+data=pd.read_csv('df.csv')
 st.dataframe(data=data)
