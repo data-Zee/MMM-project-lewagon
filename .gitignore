@@ -5,6 +5,7 @@
 data/
 raw_data/
 *.csv
+!*df.csv
 **/__pycache__/
 .env
 build/

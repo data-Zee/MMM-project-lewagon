@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
 import os
-from mmmproject.app.streamlit_app import data
+
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df.csv")
+data=pd.read_csv(path)
 
 st.sidebar.markdown("# 📋 Data Set")
 
