@@ -15,6 +15,7 @@ def load_model(flag="default"):
         model = None
     return model
 
+# save as pickle file
 # def save_model():
 #     parent_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 #     data_dir = 'raw_data'
@@ -22,4 +23,4 @@ def load_model(flag="default"):
 
 #     pipeline_save_path = os.path.join(parent_dir,'pipelines',f'pipeline-{datetime.now()}.pkl')
 #     with open(pipeline_save_path, 'wb') as file:
-#     pickle.dump(model, file)
+#        pickle.dump(model, file)
