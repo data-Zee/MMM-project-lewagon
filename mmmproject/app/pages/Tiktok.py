@@ -5,8 +5,8 @@ import pandas as pd
 import os
 
 #DATA
-path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df.csv")
-data=pd.read_csv(path)
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tt.csv")
+tt_data=pd.read_csv(path)
 
 st.subheader('Tiktok Visualisations', divider='rainbow')
 st.sidebar.markdown("# Tiktok")
