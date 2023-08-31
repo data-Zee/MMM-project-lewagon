@@ -1,10 +1,6 @@
 
-# this .py file has been created by guido to have test data and test model for api
-# is replaced by Victor -> registry.py -> loading model from pickle
-
-
-
-
+# this df_model.py can be neglected -> is replaced with registry.py -> loads model from pickle file (stored in pipelines folder)
+# this df_model.py file has been created by guido to have test data and a model to test api
 
 
 
