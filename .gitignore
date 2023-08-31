@@ -6,6 +6,7 @@ data/
 raw_data/
 *.csv
 !*df.csv
+!*df_NAN.csv
 **/__pycache__/
 .env
 build/

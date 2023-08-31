@@ -4,64 +4,36 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 
-path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df.csv")
-data=pd.read_csv(path)
+
+#DATA
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df_NAN.csv")
+df=pd.read_csv(path)
+channels_spend = ["tt_costs", "fb_costs", "google_costs"]
+df["Total_Spend"] = df[channels_spend].sum(axis=1)
+df.drop(columns=['Unnamed: 0'], inplace=True, axis=1)
+df['ROI']= df['total_sales']/df["Total_Spend"]
+df['fb_cpc']=df['fb_costs']/df['fb_clicks']
+df['tt_cpc']=df['tt_costs']/df['tt_clicks']
+df['google_cpc']=df['google_costs']/df['google_clicks']
+df['fb_cpm']=(df['fb_costs']/df['fb_impressions'])*1000
+df['tt_cpm']=(df['tt_costs']/df['tt_impressions'])*1000
+df['google_cpm']=(df['google_costs']/df['google_impressions'])*1000
+channels_spend_CPC = ["tt_cpc", "fb_cpc", "google_cpc"]
+df["Total_Spend_CPC"] = df[channels_spend_CPC].sum(axis=1)
+channels_spend_CPM = ["tt_cpm", "fb_cpm", "google_cpm"]
+df["Total_Spend_CPM"] = df[channels_spend_CPM].sum(axis=1)
+# Convert 'Day' column to datetime type
+df['Day'] = pd.to_datetime(df['Day'])
+# Set 'Day' column as index
+df.set_index('Day', inplace=True)
+# Check if the index is a DatetimeIndex
+print(df.index)
+# Resample data by month and aggregate using sum (you can use other aggregation functions)
+df_monthly = df.resample('M').sum()
+
+
 
 st.sidebar.markdown("# 📈 Plots")
 
 #Plots
 st.subheader('Visualisations', divider='rainbow')
-
-
-#FIRST PLOT
-# Set the style for the plot (optional)
-sns.set(style="whitegrid")
-# Create the scatter plot using Seaborn
-fig1=plt.figure(figsize=(10, 6))
-sns.scatterplot(x='tt_clicks', y='total_sales', data=data, label='TikTok', color='blue')
-sns.scatterplot(x='fb_clicks', y='total_sales', data=data, label='Facebook', color='green')
-sns.scatterplot(x='google_clicks', y='total_sales', data=data, label='Google', color='orange')
-# Set plot title and labels
-plt.title('Clicks vs. Total Sales')
-plt.xlabel('Clicks')
-plt.ylabel('Total Sales')
-# Show legend
-plt.legend()
-# Show the plot
-st.pyplot(fig1)
-
-
-#SECOND PLOT
-# Set the style for the plot (optional)
-sns.set(style="whitegrid")
-# Create the scatter plot using Seaborn
-fig2=plt.figure(figsize=(10, 6))
-sns.scatterplot(x='tt_impressions', y='total_sales', data=data, label='TikTok', color='blue')
-sns.scatterplot(x='fb_impressions', y='total_sales', data=data, label='Facebook', color='green')
-sns.scatterplot(x='google_impressions', y='total_sales', data=data, label='Google', color='orange')
-# Set plot title and labels
-plt.title('Impressions vs. Total Sales')
-plt.xlabel('Impressions')
-plt.ylabel('Total Sales')
-# Show legend
-plt.legend()
-# Show the plot
-st.pyplot(fig2)
-
-
-#THIRD PLOT
-# Set the style for the plot (optional)
-sns.set(style="whitegrid")
-# Create the scatter plot using Seaborn
-fig3=plt.figure(figsize=(10, 6))
-sns.scatterplot(x='tt_costs', y='total_sales', data=data, label='TikTok', color='blue')
-sns.scatterplot(x='fb_costs', y='total_sales', data=data, label='Facebook', color='green')
-sns.scatterplot(x='google_costs', y='total_sales', data=data, label='Google', color='orange')
-# Set plot title and labels
-plt.title('Costs vs. Total Sales')
-plt.xlabel('Costs')
-plt.ylabel('Total Sales')
-# Show legend
-plt.legend()
-# Show the plot
-st.pyplot(fig3)
