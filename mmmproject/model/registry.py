@@ -21,10 +21,11 @@ def load_model(flag="default"):
         try:
             # Create a blob object from the filepath
             blob = bucket.blob("model.pkl")
+            print('blob_created')
             # Download the file to a destination
-            latest_model_path_to_save = os.path.join(LOCAL_REGISTRY_PATH, 'model.pkl')
+            latest_model_path_to_save = os.path.join(MODEL_REGISTRY_PATH, 'model.pkl')
             blob.download_to_filename(latest_model_path_to_save)
-
+            print('blob_downloaded')
             latest_model = pickle.load(open(latest_model_path_to_save, 'rb'))
 
             print("✅ Latest model downloaded from cloud storage")
