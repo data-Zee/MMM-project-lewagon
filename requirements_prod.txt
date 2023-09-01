@@ -1,2 +1,9 @@
 fastapi
 uvicorn
+mamimo
+google.cloud
+numpy
+pandas
+google-cloud-storage
+python-dotenv
+scikit-learn
