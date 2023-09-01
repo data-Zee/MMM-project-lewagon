@@ -22,8 +22,11 @@ BUCKET_NAME = os.environ.get("BUCKET_NAME")
 # GCR_MEMORY = os.environ.get("GCR_MEMORY")
 
 ##################  CONSTANTS  #####################
-LOCAL_DATA_PATH = os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "data")
-LOCAL_REGISTRY_PATH =  os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "training_outputs")
+#LOCAL_DATA_PATH = os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "data")
+#LOCAL_REGISTRY_PATH =  os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "training_outputs")
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
+MODEL_REGISTRY_PATH = os.path.join(ROOT_PATH, "..", "model_load")
+#LOCAL_REGISTRY_PATH = os.environ.get("LOCAL_REGISTRY_PATH")
 
 COLUMN_NAMES_RAW = ['fare_amount','pickup_datetime', 'pickup_longitude', 'pickup_latitude', 'dropoff_longitude', 'dropoff_latitude', 'passenger_count']
 
