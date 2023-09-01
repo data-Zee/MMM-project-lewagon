@@ -11,9 +11,8 @@ st.subheader('Predict Your Sales', divider='rainbow')
 facebook = st.number_input('Insert your budget for Facebook')
 tiktok = st.number_input('Insert your budget for Tiktok')
 google = st.number_input('Insert your budget for Google')
-date=st.date_input('Instert your current date', datetime.date(2019, 7, 6)
-st.write(f"""The current budget for Facebook is: {facebook},
-         for Tiktok is: {tiktok}, and for Google is: {google}""")
+date=st.date_input('Instert your current date', datetime.date(2019, 7, 6))
+st.write(f"""The current budget for Facebook is: {facebook}, for Tiktok is: {tiktok}, and for Google is: {google}""")
 
 params= {'facebook':facebook,
         'tiktok':tiktok,
