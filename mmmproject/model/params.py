@@ -2,7 +2,7 @@ import os
 import numpy as np
 
 ##################  VARIABLES  ##################
-DATA_SIZE = os.environ.get("DATA_SIZE")
+DATA_SIZE = '1k'
 MODEL_TARGET = os.environ.get("MODEL_TARGET")
 GCP_PROJECT = os.environ.get("GCP_PROJECT")
 GCP_PROJECT= os.environ.get("GCP_PROJEC")
@@ -44,7 +44,6 @@ DTYPES_PROCESSED = np.float32
 ################## VALIDATIONS #################
 
 env_valid_options = dict(
-    DATA_SIZE=["1k", "200k", "all"],
     MODEL_TARGET=["local", "gcs", "mlflow"],
 )
 
