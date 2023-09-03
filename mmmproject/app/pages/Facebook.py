@@ -51,7 +51,7 @@ fig1.add_trace(go.Scatter(x=df["fb_clicks"],y=df["fb_cpc"],mode='markers'),row=1
 fig1.update_xaxes(title_text="Clicks",row=1,col=2)
 fig1.update_yaxes(title_text="Cost Per Clicks",row=1,col=2)
 #fig1.update_layout(title="Clicks vs Costs",row=1,col=2)
-fig1.update_traces(marker_size=8,marker_line=dict(width=1, color='black'))
+fig1.update_traces(marker_size=6,marker_line=dict(width=1, color='black'))
 with tab1:
     st.header("Facebook Impressions / Clicks vs Costs")
     st.plotly_chart(fig1)

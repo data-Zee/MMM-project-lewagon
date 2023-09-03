@@ -9,3 +9,6 @@ seaborn
 scikit-learn
 streamlit
 FastAPI
+fastapi
+uvicorn
+mamimo
