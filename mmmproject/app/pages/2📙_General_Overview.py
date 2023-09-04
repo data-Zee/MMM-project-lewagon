@@ -58,7 +58,7 @@ with tab1:
 
 
 #SECOND PLOT
-fig2 = make_subplots(rows=1,cols=2,subplot_titles=("Subplot 1", "Subplot 2"))
+fig2 = make_subplots(rows=1,cols=2)
 fig2.add_trace(go.Scatter(x=df['tt_clicks'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#069AF3'},showlegend=False),row=1,col=1)
 fig2.add_trace(go.Scatter(x=df['fb_clicks'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'#FF7F50'},showlegend=False),row=1,col=1)
 fig2.add_trace(go.Scatter(x=df['google_clicks'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'#008000'},showlegend=False),row=1,col=1)

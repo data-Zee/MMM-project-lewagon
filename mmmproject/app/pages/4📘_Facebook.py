@@ -52,7 +52,7 @@ fig1.update_yaxes(title_text="Cost Per Clicks",row=1,col=2)
 #fig1.update_layout(title="Clicks vs Costs",row=1,col=2)
 fig1.update_traces(marker_size=6,marker_line=dict(width=1, color='black'))
 with tab1:
-    st.subheader("Facebook Impressions/Clicks vs Costs")
+    st.subheader("Impressions/Clicks vs Costs")
     st.plotly_chart(fig1)
     st.markdown("""
     <div style="text-align: justify;">
@@ -101,7 +101,7 @@ fig3.update_xaxes(title_text="Date")
 fig3.update_yaxes(title_text="Costs / Clicks", secondary_y=False)
 fig3.update_yaxes(title_text="Impressions", secondary_y=True)
 with tab3:
-    st.subheader("Facebook Monthly Impressions, Clicks, and Costs")
+    st.subheader("Monthly Impressions, Clicks, and Costs")
     st.plotly_chart(fig3)
     st.markdown("""
     <div style="text-align: justify;">
