@@ -3,7 +3,6 @@ import pandas as pd
 import os
 
 #DATA
-#DATA
 path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df_NAN.csv")
 df=pd.read_csv(path)
 channels_spend = ["tt_costs", "fb_costs", "google_costs"]
