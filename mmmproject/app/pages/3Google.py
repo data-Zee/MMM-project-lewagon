@@ -6,7 +6,6 @@ import os
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-
 #DATA
 path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "df_NAN.csv")
 df=pd.read_csv(path)
@@ -34,40 +33,36 @@ print(df.index)
 df_monthly = df.resample('M').sum()
 
 
-
-st.subheader('Facebook Visualisations', divider='rainbow')
-st.sidebar.markdown("# Facebook")
-tab1, tab2 = st.tabs(["Impressions / Clicks vs Costs","Monthly Impressions, Clicks, and Costs"])
-
+st.subheader('Google Visualisations', divider='green')
+st.sidebar.markdown("# Google")
+tab1, tab2 = st.tabs(["Impressions / Clicks vs Costs", "Monthly Impressions, Clicks, and Costs"])
 
 #FIRST PLOT
 fig1 = make_subplots(rows=1,cols=2)
 fig1.update_layout(showlegend=False)
-fig1.add_trace(go.Scatter(x=df["fb_impressions"],y=df["fb_cpm"],mode='markers'),row=1,col=1)
+fig1.add_trace(go.Scatter(x=df["google_impressions"],y=df["google_cpm"],mode='markers',marker={'color':'#FF7F50'}),row=1,col=1)
 fig1.update_xaxes(title_text="Impressions",row=1,col=1)
-fig1.update_yaxes(title_text="Clicks per Impressions",row=1,col=1)
-#fig1.update_title(title_text="Impressions vs Costs",row=1,col=1)
-fig1.add_trace(go.Scatter(x=df["fb_clicks"],y=df["fb_cpc"],mode='markers'),row=1,col=2)
+fig1.update_yaxes(title_text="Click Per Impressions",row=1,col=1)
+fig1.add_trace(go.Scatter(x=df["google_clicks"],y=df["google_cpc"],mode='markers',marker={'color':'#008000'}),row=1,col=2)
 fig1.update_xaxes(title_text="Clicks",row=1,col=2)
 fig1.update_yaxes(title_text="Cost Per Clicks",row=1,col=2)
-#fig1.update_layout(title="Clicks vs Costs",row=1,col=2)
-fig1.update_traces(marker_size=8,marker_line=dict(width=1, color='black'))
+fig1.update_traces(marker_size=6,marker_line=dict(width=1, color='black'))
 with tab1:
-    st.header("Facebook Impressions / Clicks vs Costs")
+    st.header("Google Impressions / Clicks vs Costs")
     st.plotly_chart(fig1)
 
 
 #SECOND PLOT
 # Create figure with secondary y-axis
 fig2 = make_subplots(specs=[[{"secondary_y": True}]])
-fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_clicks'],name='Clicks'), secondary_y=False)
-fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_impressions'], name='Impressions'), secondary_y=True)
-fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_costs'],name='Costs'), secondary_y=False)
+fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['google_clicks'],name='Clicks',marker={'color':'#069AF3'}), secondary_y=False)
+fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['google_impressions'], name='Impressions',marker={'color':'#008000'}), secondary_y=True)
+fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['google_costs'],name='Costs',marker={'color':'#FF7F50'}), secondary_y=False)
 # Set x-axis title
 fig2.update_xaxes(title_text="Date")
 # Set y-axes titles
 fig2.update_yaxes(title_text="Costs / Clicks", secondary_y=False)
 fig2.update_yaxes(title_text="Impressions", secondary_y=True)
 with tab2:
-    st.header("Facebook Monthly Impressions, Clicks, and Costs")
+    st.header("Google Monthly Impressions, Clicks, and Costs")
     st.plotly_chart(fig2)

@@ -11,4 +11,4 @@ streamlit
 fastapi
 uvicorn
 mamimo
-
+plotly
