@@ -2,14 +2,39 @@ import pandas as pd
 import os
 import pickle
 from datetime import datetime
+from google.cloud import storage
+from mmmproject.model.params import *
 
 def load_model(flag="default"):
     dirname = os.path.dirname(os.path.abspath(__file__))
     path_load = os.path.join(dirname,"..", "..", "pipelines")
 
-    if flag == "default":
+    if MODEL_TARGET == "local":
         model_path = os.path.join(path_load, "pipeline-2023-08-31.pkl")
         model = pickle.load(open(model_path, 'rb'))
+
+    elif MODEL_TARGET == "gcs":
+
+        client = storage.Client()
+        bucket = client.get_bucket(BUCKET_NAME)
+
+        try:
+            # Create a blob object from the filepath
+            blob = bucket.blob("model.pkl")
+            print('blob_created')
+            # Download the file to a destination
+            latest_model_path_to_save = os.path.join(MODEL_REGISTRY_PATH, 'model.pkl')
+            blob.download_to_filename(latest_model_path_to_save)
+            print('blob_downloaded')
+            latest_model = pickle.load(open(latest_model_path_to_save, 'rb'))
+
+            print("✅ Latest model downloaded from cloud storage")
+
+            return latest_model
+        except:
+            print(f"\n❌ No model found in GCS bucket {BUCKET_NAME}")
+
+
 
     else:
         model = None

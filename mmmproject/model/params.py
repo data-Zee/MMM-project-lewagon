@@ -2,10 +2,10 @@ import os
 import numpy as np
 
 ##################  VARIABLES  ##################
-DATA_SIZE = os.environ.get("DATA_SIZE")
+DATA_SIZE = '1k'
 MODEL_TARGET = os.environ.get("MODEL_TARGET")
 GCP_PROJECT = os.environ.get("GCP_PROJECT")
-GCP_PROJECT_WAGON = os.environ.get("GCP_PROJECT_WAGON")
+GCP_PROJECT= os.environ.get("GCP_PROJEC")
 GCP_REGION = os.environ.get("GCP_REGION")
 # BQ_DATASET = os.environ.get("BQ_DATASET")
 # BQ_REGION = os.environ.get("BQ_REGION")
@@ -22,8 +22,11 @@ BUCKET_NAME = os.environ.get("BUCKET_NAME")
 # GCR_MEMORY = os.environ.get("GCR_MEMORY")
 
 ##################  CONSTANTS  #####################
-LOCAL_DATA_PATH = os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "data")
-LOCAL_REGISTRY_PATH =  os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "training_outputs")
+#LOCAL_DATA_PATH = os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "data")
+#LOCAL_REGISTRY_PATH =  os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "training_outputs")
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
+MODEL_REGISTRY_PATH = os.path.join(ROOT_PATH, "..", "model_load")
+#LOCAL_REGISTRY_PATH = os.environ.get("LOCAL_REGISTRY_PATH")
 
 COLUMN_NAMES_RAW = ['fare_amount','pickup_datetime', 'pickup_longitude', 'pickup_latitude', 'dropoff_longitude', 'dropoff_latitude', 'passenger_count']
 
@@ -44,7 +47,6 @@ DTYPES_PROCESSED = np.float32
 ################## VALIDATIONS #################
 
 env_valid_options = dict(
-    DATA_SIZE=["1k", "200k", "all"],
     MODEL_TARGET=["local", "gcs", "mlflow"],
 )
 
