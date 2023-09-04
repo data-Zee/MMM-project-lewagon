@@ -35,7 +35,7 @@ df_monthly = df.resample('M').sum()
 
 
 
-st.subheader('Facebook Visualisations', divider='rainbow')
+st.subheader('Facebook Visualisations', divider='green')
 st.sidebar.markdown("# Facebook")
 tab1, tab2 = st.tabs(["Impressions / Clicks vs Costs","Monthly Impressions, Clicks, and Costs"])
 
@@ -43,11 +43,11 @@ tab1, tab2 = st.tabs(["Impressions / Clicks vs Costs","Monthly Impressions, Clic
 #FIRST PLOT
 fig1 = make_subplots(rows=1,cols=2)
 fig1.update_layout(showlegend=False)
-fig1.add_trace(go.Scatter(x=df["fb_impressions"],y=df["fb_cpm"],mode='markers'),row=1,col=1)
+fig1.add_trace(go.Scatter(x=df["fb_impressions"],y=df["fb_cpm"],mode='markers',marker={'color':'#FF7F50'}),row=1,col=1)
 fig1.update_xaxes(title_text="Impressions",row=1,col=1)
 fig1.update_yaxes(title_text="Clicks per Impressions",row=1,col=1)
 #fig1.update_title(title_text="Impressions vs Costs",row=1,col=1)
-fig1.add_trace(go.Scatter(x=df["fb_clicks"],y=df["fb_cpc"],mode='markers'),row=1,col=2)
+fig1.add_trace(go.Scatter(x=df["fb_clicks"],y=df["fb_cpc"],mode='markers',marker={'color':'#008000'}),row=1,col=2)
 fig1.update_xaxes(title_text="Clicks",row=1,col=2)
 fig1.update_yaxes(title_text="Cost Per Clicks",row=1,col=2)
 #fig1.update_layout(title="Clicks vs Costs",row=1,col=2)
@@ -60,9 +60,9 @@ with tab1:
 #SECOND PLOT
 # Create figure with secondary y-axis
 fig2 = make_subplots(specs=[[{"secondary_y": True}]])
-fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_clicks'],name='Clicks'), secondary_y=False)
-fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_impressions'], name='Impressions'), secondary_y=True)
-fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_costs'],name='Costs'), secondary_y=False)
+fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_clicks'],name='Clicks',marker={'color':'#069AF3'}), secondary_y=False)
+fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_impressions'], name='Impressions',marker={'color':'#008000'}), secondary_y=True)
+fig2.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_costs'],name='Costs',marker={'color':'#FF7F50'}), secondary_y=False)
 # Set x-axis title
 fig2.update_xaxes(title_text="Date")
 # Set y-axes titles

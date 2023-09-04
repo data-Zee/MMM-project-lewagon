@@ -35,13 +35,13 @@ df_monthly = df.resample('M').sum()
 
 
 st.sidebar.markdown("# 📈 Plots")
-st.subheader('Visualisations', divider='rainbow')
+st.subheader('Visualisations', divider='green')
 tab1, tab2, tab3, tab4 = st.tabs(["Sales/Spend Data vs Time","Clicks/Impressions vs Total Sales","Cost Per Clicks / Impressions vs Total Sales","Average ROI vs Weekday"])
 
 #FIRST PLOT
 fig1 = make_subplots()
-fig1.add_trace(go.Scatter(x=df.index,y=df['Total_Spend'],name='Total Spend'))
-fig1.add_trace(go.Scatter(x=df.index,y=df['total_sales'], name='Total Sales'))
+fig1.add_trace(go.Scatter(x=df.index,y=df['Total_Spend'],name='Total Spend',marker={'color':'#FF7F50'}))
+fig1.add_trace(go.Scatter(x=df.index,y=df['total_sales'], name='Total Sales',marker={'color':'#008000'}))
 # Set x-axis title
 fig1.update_xaxes(title_text="Date")
 # Set y-axes titles
@@ -53,18 +53,18 @@ with tab1:
 
 #SECOND PLOT
 fig2 = make_subplots(rows=1,cols=2,subplot_titles=("Subplot 1", "Subplot 2"))
-fig2.add_trace(go.Scatter(x=df['tt_clicks'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#00FFFF'},showlegend=False),row=1,col=1)
-fig2.add_trace(go.Scatter(x=df['fb_clicks'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'#04D8B2'},showlegend=False),row=1,col=1)
-fig2.add_trace(go.Scatter(x=df['google_clicks'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'green'},showlegend=False),row=1,col=1)
+fig2.add_trace(go.Scatter(x=df['tt_clicks'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#069AF3'},showlegend=False),row=1,col=1)
+fig2.add_trace(go.Scatter(x=df['fb_clicks'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'#FF7F50'},showlegend=False),row=1,col=1)
+fig2.add_trace(go.Scatter(x=df['google_clicks'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'#008000'},showlegend=False),row=1,col=1)
 #fig2.update_layout(showlegend=False,row=1,col=2)
 # Set x-axis title
 fig2.update_xaxes(title_text="Clicks",row=1,col=1)
 #FOR HAVING FRAME(in update_xaxes):mirror=True,showline=True, linecolor = 'lightgray'
 # Set y-axes titles
 fig2.update_yaxes(title_text="Total Sales",row=1,col=1)
-fig2.add_trace(go.Scatter(x=df['tt_impressions'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#4B0082'}),row=1,col=2)
-fig2.add_trace(go.Scatter(x=df['fb_impressions'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'#00FFFF'}),row=1,col=2)
-fig2.add_trace(go.Scatter(x=df['google_impressions'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'#BBF90F'}),row=1,col=2)
+fig2.add_trace(go.Scatter(x=df['tt_impressions'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#069AF3'}),row=1,col=2)
+fig2.add_trace(go.Scatter(x=df['fb_impressions'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'#FF7F50'}),row=1,col=2)
+fig2.add_trace(go.Scatter(x=df['google_impressions'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'#008000'}),row=1,col=2)
 # Set x-axis title
 fig2.update_xaxes(title_text="Impressions",row=1,col=2)
 # Set y-axes titles
@@ -77,16 +77,16 @@ with tab2:
 
 #THIRD PLOT
 fig3 = make_subplots(rows=1,cols=2)
-fig3.add_trace(go.Scatter(x=df['tt_cpc'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'red'},showlegend=False),row=1,col=1)
-fig3.add_trace(go.Scatter(x=df['fb_cpc'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'blue'},showlegend=False),row=1,col=1)
-fig3.add_trace(go.Scatter(x=df['google_cpc'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'green'},showlegend=False),row=1,col=1)
+fig3.add_trace(go.Scatter(x=df['tt_cpc'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#069AF3'},showlegend=False),row=1,col=1)
+fig3.add_trace(go.Scatter(x=df['fb_cpc'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'#FF7F50'},showlegend=False),row=1,col=1)
+fig3.add_trace(go.Scatter(x=df['google_cpc'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'#008000'},showlegend=False),row=1,col=1)
 # Set x-axis title
 fig3.update_xaxes(title_text="Cost Per Clicks",row=1,col=1)
 # Set y-axes titles
 fig3.update_yaxes(title_text="Total Sales",row=1,col=1)
-fig3.add_trace(go.Scatter(x=df['tt_cpm'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'red'}),row=1,col=2)
-fig3.add_trace(go.Scatter(x=df['fb_cpm'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'blue'}),row=1,col=2)
-fig3.add_trace(go.Scatter(x=df['google_cpm'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'green'}),row=1,col=2)
+fig3.add_trace(go.Scatter(x=df['tt_cpm'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#069AF3'}),row=1,col=2)
+fig3.add_trace(go.Scatter(x=df['fb_cpm'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'#FF7F50'}),row=1,col=2)
+fig3.add_trace(go.Scatter(x=df['google_cpm'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'#008000'}),row=1,col=2)
 # Set x-axis title
 fig3.update_xaxes(title_text="Clicks Per Impressions",row=1,col=2)
 # Set y-axes titles
@@ -101,7 +101,7 @@ with tab3:
 x=df.groupby(df.index.dayofweek)["ROI"].mean()
 fig4 = make_subplots()
 fig4.update_layout(showlegend=False)
-fig4.add_trace(go.Scatter(x=x.index,y=x,mode='lines'))
+fig4.add_trace(go.Scatter(x=x.index,y=x,mode='lines',marker={'color':'#008000'}))
 fig4.update_xaxes(title_text="Weekday")
 fig4.update_yaxes(title_text="Average ROI")
 #fig1.update_title(title_text="Impressions vs Costs")

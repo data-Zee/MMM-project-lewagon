@@ -7,7 +7,7 @@ st.sidebar.markdown("# 🧮 Prediction")
 
 
 #Prediction
-st.subheader('Predict Your Sales', divider='rainbow')
+st.subheader('Predict Your Sales', divider='green')
 facebook = st.number_input('Insert your budget for Facebook')
 tiktok = st.number_input('Insert your budget for Tiktok')
 google = st.number_input('Insert your budget for Google')
