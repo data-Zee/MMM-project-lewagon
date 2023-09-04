@@ -33,10 +33,8 @@ print(df.index)
 df_monthly = df.resample('M').sum()
 
 
-
-st.sidebar.markdown("# 📈 Plots")
-st.subheader('Visualisations', divider='green')
-tab1, tab2, tab3, tab4 = st.tabs(["Sales/Spend Data vs Time","Clicks/Impressions vs Total Sales","Cost Per Clicks / Impressions vs Total Sales","Average ROI vs Weekday"])
+st.header('General Overview', divider='green')
+tab1, tab2, tab3 = st.tabs(["Sales/Spend Data vs Time","Clicks/Impressions vs Total Sales","Average ROI vs Weekday"])
 
 #FIRST PLOT
 fig1 = make_subplots()
@@ -47,8 +45,16 @@ fig1.update_xaxes(title_text="Date")
 # Set y-axes titles
 fig1.update_yaxes(title_text="Amount")
 with tab1:
-    st.header("Sales / Spend Data vs Time")
+    st.subheader("Sales / Spend Data vs Time")
     st.plotly_chart(fig1)
+    st.markdown("""
+    <div style="text-align: justify;">
+    ✅ Consistent marketing expenditure over time fuels gradual sales growth, with marketing costs consistently kept below sales figures.
+
+    ✅ The ongoing commitment to marketing activities results in sustained sales growth, while effective cost management remains a constant.
+
+    ✅ The fact that marketing expenses consistently remain below sales revenue highlights a positive and sustainable trend in the company's marketing success.
+    </div>""",unsafe_allow_html=True)
 
 
 #SECOND PLOT
@@ -71,40 +77,32 @@ fig2.update_xaxes(title_text="Impressions",row=1,col=2)
 fig2.update_yaxes(title_text="Total Sales",row=1,col=2)
 fig2.update_traces(marker_size=6,marker_line=dict(width=1, color='black'))
 with tab2:
-    st.header("Clicks / Impressions vs Total Sales")
+    st.subheader("Clicks / Impressions vs Total Sales")
     st.plotly_chart(fig2)
+    st.markdown("""
+    <div style="text-align: justify;">
+    ✅ There is a clear and strong correlation between the number of clicks and the total sales across all platforms. This suggests that an increase in clicks tends to result in higher overall sales.
 
+    ✅ Additionally, a robust correlation is observed between total sales and impressions on both Facebook and TikTok. This indicates that higher impressions on these platforms positively influence overall sales.
+
+    ✅ In contrast, there is no clear correlation between Google's impressions and total sales. This observation aligns with the notion that Google might not be the ideal platform for generating high impression numbers.
+
+    ✅ These insights underscore the importance of platform selection and click optimization in achieving marketing goals across different platforms.
+    </div>""",unsafe_allow_html=True)
 
 #THIRD PLOT
-fig3 = make_subplots(rows=1,cols=2)
-fig3.add_trace(go.Scatter(x=df['tt_cpc'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#069AF3'},showlegend=False),row=1,col=1)
-fig3.add_trace(go.Scatter(x=df['fb_cpc'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'#FF7F50'},showlegend=False),row=1,col=1)
-fig3.add_trace(go.Scatter(x=df['google_cpc'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'#008000'},showlegend=False),row=1,col=1)
-# Set x-axis title
-fig3.update_xaxes(title_text="Cost Per Clicks",row=1,col=1)
-# Set y-axes titles
-fig3.update_yaxes(title_text="Total Sales",row=1,col=1)
-fig3.add_trace(go.Scatter(x=df['tt_cpm'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#069AF3'}),row=1,col=2)
-fig3.add_trace(go.Scatter(x=df['fb_cpm'],y=df['total_sales'], name='Facebook',mode='markers',marker={'color':'#FF7F50'}),row=1,col=2)
-fig3.add_trace(go.Scatter(x=df['google_cpm'],y=df['total_sales'],name='Google',mode='markers',marker={'color':'#008000'}),row=1,col=2)
-# Set x-axis title
-fig3.update_xaxes(title_text="Clicks Per Impressions",row=1,col=2)
-# Set y-axes titles
-fig3.update_yaxes(title_text="Total Sales",row=1,col=2)
-fig3.update_traces(marker_size=6,marker_line=dict(width=1, color='black',colorscale='Viridis'))
-with tab3:
-    st.header("Cost Per Clicks / Impressions vs Total Sales")
-    st.plotly_chart(fig3)
-
-
-#FORTH PLOT
 x=df.groupby(df.index.dayofweek)["ROI"].mean()
-fig4 = make_subplots()
-fig4.update_layout(showlegend=False)
-fig4.add_trace(go.Scatter(x=x.index,y=x,mode='lines',marker={'color':'#008000'}))
-fig4.update_xaxes(title_text="Weekday")
-fig4.update_yaxes(title_text="Average ROI")
-#fig1.update_title(title_text="Impressions vs Costs")
-with tab4:
-    st.header("Average ROI vs Weekday")
-    st.plotly_chart(fig4)
+fig3 = make_subplots()
+fig3.update_layout(showlegend=False)
+fig3.add_trace(go.Scatter(x=x.index,y=x,mode='lines',marker={'color':'#008000'}))
+fig3.update_xaxes(title_text="Weekday")
+fig3.update_yaxes(title_text="Average ROI")
+with tab3:
+    st.subheader("Average ROI vs Weekday")
+    st.plotly_chart(fig3)
+    st.markdown("""
+    <div style="text-align: justify;">
+    ✅ The graphs clearly reveal that our average return on investment (ROI) is at its lowest on Fridays and Saturdays, suggesting these days witness the weakest sales performance throughout the week.
+
+    ✅ To address this, we should delve into the underlying reasons behind this trend and consider tailored marketing strategies to potentially boost sales during these weekend days.
+    </div>""",unsafe_allow_html=True)

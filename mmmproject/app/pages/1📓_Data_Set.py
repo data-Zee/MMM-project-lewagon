@@ -30,8 +30,7 @@ print(df.index)
 df_monthly = df.resample('M').sum()
 
 
-st.subheader('Data Set', divider='green')
-st.sidebar.markdown("# 📋 Data Set")
+st.header('Data Set', divider='green')
 
 
 #DataFrame
