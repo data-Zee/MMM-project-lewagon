@@ -5,7 +5,7 @@ import numpy as np
 DATA_SIZE = '1k'
 MODEL_TARGET = os.environ.get("MODEL_TARGET")
 GCP_PROJECT = os.environ.get("GCP_PROJECT")
-GCP_PROJECT_WAGON = os.environ.get("GCP_PROJECT_WAGON")
+GCP_PROJECT= os.environ.get("GCP_PROJEC")
 GCP_REGION = os.environ.get("GCP_REGION")
 # BQ_DATASET = os.environ.get("BQ_DATASET")
 # BQ_REGION = os.environ.get("BQ_REGION")
