@@ -36,7 +36,7 @@ df_monthly = df.resample('M').sum()
 
 
 st.header('Facebook Visualisations', divider='green')
-tab1, tab2,tab3 = st.tabs(["Impressions / Clicks vs Costs","Impressions/Clicks vs Costs","Monthly Impressions, Clicks, and Costs"])
+tab1, tab2,tab3 = st.tabs(["Impressions / Clicks vs Costs","Costs vs Impressions/Clicks","Monthly Impressions, Clicks, and Costs"])
 
 
 #FIRST PLOT
@@ -78,7 +78,7 @@ fig2.update_xaxes(title_text="Clicks",row=1,col=2)
 fig2.update_yaxes(title_text="Costs",row=1,col=2)
 fig2.update_traces(marker_size=6,marker_line=dict(width=1, color='black'))
 with tab2:
-    st.subheader("Impressions/Clicks vs Costs")
+    st.subheader("Costs vs Impressions/Clicks")
     st.plotly_chart(fig2)
     st.markdown("""
     <div style="text-align: justify;">
@@ -95,9 +95,7 @@ fig3 = make_subplots(specs=[[{"secondary_y": True}]])
 fig3.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_clicks'],name='Clicks',marker={'color':'#069AF3'}), secondary_y=False)
 fig3.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_impressions'], name='Impressions',marker={'color':'#008000'}), secondary_y=True)
 fig3.add_trace(go.Scatter(x=df_monthly.index,y=df_monthly['fb_costs'],name='Costs',marker={'color':'#FF7F50'}), secondary_y=False)
-# Set x-axis title
 fig3.update_xaxes(title_text="Date")
-# Set y-axes titles
 fig3.update_yaxes(title_text="Costs / Clicks", secondary_y=False)
 fig3.update_yaxes(title_text="Impressions", secondary_y=True)
 with tab3:

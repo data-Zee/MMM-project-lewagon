@@ -34,7 +34,7 @@ df_monthly = df.resample('M').sum()
 
 
 st.header('Google Visualisations', divider='green')
-tab1, tab2,tab3 = st.tabs(["Impressions / Clicks vs Costs","Impressions/Clicks vs Costs", "Monthly Impressions, Clicks, and Costs"])
+tab1, tab2,tab3 = st.tabs(["Impressions / Clicks vs Costs","Costs vs Impressions/Clicks", "Monthly Impressions, Clicks, and Costs"])
 
 #FIRST PLOT
 fig1 = make_subplots(rows=1,cols=2)
@@ -74,7 +74,7 @@ fig2.update_xaxes(title_text="Clicks",row=1,col=2)
 fig2.update_yaxes(title_text="Costs",row=1,col=2)
 fig2.update_traces(marker_size=6,marker_line=dict(width=1, color='black'))
 with tab2:
-    st.subheader("Impressions/Clicks vs Costs")
+    st.subheader("Costs vs Impressions/Clicks")
     st.plotly_chart(fig2)
     st.markdown("""
     <div style="text-align: justify;">
