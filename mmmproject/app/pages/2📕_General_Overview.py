@@ -34,7 +34,7 @@ df_monthly = df.resample('M').sum()
 
 
 st.header('General Overview', divider='green')
-tab1, tab2, tab3 = st.tabs(["Sales/Spend Data vs Time","Clicks/Impressions vs Total Sales","Average ROI vs Weekday"])
+tab1, tab2, tab3 = st.tabs(["Monthly Sales/Spend","Total Sales vs Clicks/Impressions","Average ROI vs Weekday"])
 
 #FIRST PLOT
 fig1 = make_subplots()
@@ -45,7 +45,7 @@ fig1.update_xaxes(title_text="Date")
 # Set y-axes titles
 fig1.update_yaxes(title_text="Amount")
 with tab1:
-    st.subheader("Sales / Spend Data vs Time")
+    st.subheader("Monthly Sales/Spend")
     st.plotly_chart(fig1)
     st.markdown("""
     <div style="text-align: justify;">
@@ -77,7 +77,7 @@ fig2.update_xaxes(title_text="Impressions",row=1,col=2)
 fig2.update_yaxes(title_text="Total Sales",row=1,col=2)
 fig2.update_traces(marker_size=6,marker_line=dict(width=1, color='black'))
 with tab2:
-    st.subheader("Clicks / Impressions vs Total Sales")
+    st.subheader("Total Sales vs Clicks/Impressions")
     st.plotly_chart(fig2)
     st.markdown("""
     <div style="text-align: justify;">
@@ -94,7 +94,7 @@ with tab2:
 x=df.groupby(df.index.dayofweek)["ROI"].mean()
 fig3 = make_subplots()
 fig3.update_layout(showlegend=False)
-fig3.add_trace(go.Scatter(x=x.index,y=x,mode='lines',marker={'color':'#008000'}))
+fig3.add_trace(go.Scatter(x=x.index.map({0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'}),y=x,mode='lines',marker={'color':'#008000'}))
 fig3.update_xaxes(title_text="Weekday")
 fig3.update_yaxes(title_text="Average ROI")
 with tab3:
