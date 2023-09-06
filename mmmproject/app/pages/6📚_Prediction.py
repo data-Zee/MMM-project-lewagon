@@ -2,7 +2,7 @@ import streamlit as st
 import time
 import requests
 import datetime
-
+import pandas as pd
 
 #Prediction
 st.header('Predict Your Sales', divider='green')
@@ -25,3 +25,9 @@ if st.button('prediction'):
         response=requests.get(url,params).json()
         pred = response['predicted_sale']
     st.success(f"""PREDICTED SALE = {pred} !""")
+    #coef=pd.DataFrame([co[0],co[1],co[2]],columns=('Google','Facebook','Tiktok'),index=['Coefficient'])
+    #st.dataframe(coef)
+
+
+coef=pd.DataFrame([[2,34,78]],columns=('Google','Facebook','Tiktok'),index=['Coefficient'])
+st.dataframe(coef)
