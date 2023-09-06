@@ -12,7 +12,6 @@ import holidays
 import os
 import pickle
 from datetime import datetime
-from google.cloud import storage
 from mmmproject.model.params import *
 
 
