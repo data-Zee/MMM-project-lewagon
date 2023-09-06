@@ -24,4 +24,4 @@ if st.button('prediction'):
         time.sleep(1)
         response=requests.get(url,params).json()
         pred = response['predicted_sale']
-    st.success(f'PREDICTED SALE = {pred} !')
+    st.success(f"""PREDICTED SALE = {pred} !""")
