@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 import pandas as pd
+from mmmproject.model.params import *
 from mmmproject.model.registry import load_model
 from mmmproject.model.lp_model import find_optimal_budget
 import datetime as datetime
@@ -46,8 +47,22 @@ def query_budget_divider(TOTAL_DAILY_BUDGET: float, Date: str):
 
 
 
+@app.get("/clickpredict")
+def query_click_predict(date: str, facebook: float, google: float, tiktok: float):
 
-
+    """
+    Returns predicted sales data from "df" according input data
+    """
+    b = [intercept, weekend, facebook, google, tiktok]
+    # creating 1 row data as input, X_pred
+    dict_feat = {
+        "date": date,
+        "google": google,
+        "facebook": facebook,
+        "tiktok": tiktok
+    }
+    X=dict_feat.values()
+    return b[0] + np.dot(X, b[1:])
 
 
 

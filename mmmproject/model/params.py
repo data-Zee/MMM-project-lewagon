@@ -42,7 +42,11 @@ DTYPES_RAW = {
 
 DTYPES_PROCESSED = np.float32
 
-
+intercept= 133.12031243
+weekend= -69.17339136
+facebook= 1236.51148254
+google= 280
+tiktok= 1782.03178883
 
 ################## VALIDATIONS #################
 
