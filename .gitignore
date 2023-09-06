@@ -7,6 +7,8 @@ raw_data/
 *.csv
 !*df.csv
 !*df_NAN.csv
+!*df_avg_cpc_cpm.csv
+!*df_avg.csv
 **/__pycache__/
 .env
 build/
