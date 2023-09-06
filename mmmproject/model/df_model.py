@@ -3,12 +3,6 @@
 # this df_model.py file has been created by guido to have test data and a model to test api
 
 
-
-
-
-
-
-
 # import pandas as pd
 # from mamimo.carryover import ExponentialCarryover
 # from mamimo.saturation import ExponentialSaturation

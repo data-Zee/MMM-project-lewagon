@@ -11,4 +11,6 @@ streamlit
 fastapi
 uvicorn
 mamimo
+cvxpy
+holidays
 plotly

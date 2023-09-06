@@ -7,3 +7,5 @@ pandas
 google-cloud-storage
 python-dotenv
 scikit-learn
+cvxpy
+holidays

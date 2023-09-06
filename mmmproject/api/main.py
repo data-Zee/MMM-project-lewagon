@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 import pandas as pd
 from mmmproject.model.registry import load_model
+from mmmproject.model.lp_model import find_optimal_budget
 import datetime as datetime
 
 app = FastAPI()
 app.state.model = load_model(flag="default")
-
 
 # Define a root `/` endpoint -> standard endpoint for checking if API is working.
 @app.get("/")
@@ -35,6 +35,23 @@ def query_sale_predict(date: str, facebook: float, google: float, tiktok: float)
     y_pred = app.state.model.predict(X_pred)
 
     return {"predicted_sale": y_pred[0]}
+
+@app.get("/budgetdivider")
+def query_budget_divider(TOTAL_DAILY_BUDGET: float, Date: str):
+    """
+    Returns amount of different advertisements according to input data
+    """
+    optimal_solution=find_optimal_budget(TOTAL_DAILY_BUDGET, Date)
+    return {'Status':optimal_solution[0], 'Total_sales':optimal_solution[1], 'Google Budget': optimal_solution[2] ,'Facebook Budget':optimal_solution[3],'Tiktok Budget':optimal_solution[4]}
+
+
+
+
+
+
+
+
+
 
 
 
