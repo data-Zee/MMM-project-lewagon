@@ -111,7 +111,7 @@ with tab2:
 x=df.groupby(df.index.dayofweek)["ROI"].mean()
 fig6 = make_subplots()
 fig6.update_layout(showlegend=False)
-fig6.add_trace(go.Scatter(x=x.index.map({0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'}),y=x,mode='lines',marker={'color':'#008000'}))
+fig6.add_trace(go.Bar(x=x.index.map({0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'}),y=x,marker={'color':'#008000'}))
 fig6.update_xaxes(title_text="Weekday")
 fig6.update_yaxes(title_text="Average ROI")
 with tab3:
