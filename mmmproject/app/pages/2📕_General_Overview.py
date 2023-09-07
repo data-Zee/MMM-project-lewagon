@@ -38,7 +38,7 @@ df_monthly = df.resample('M').sum()
 
 
 st.header('General Overview', divider='green')
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Monthly Sales/Spend/ROI","Media Buying","Impressions/Clicks vs Total Sales","Media Impressions/Clicks/Costs Corr To Sale","new","Average ROI vs Weekday"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Monthly Sales/Spend/ROI","Total Sales vs Impressions/Clicks","Average ROI vs Weekday","Media Buying","Media Impressions/Clicks/Costs Corr To Sale","Comparing Platforms"])
 
 #FIRST PLOT
 fig1_1 = make_subplots()
@@ -71,26 +71,6 @@ with tab1:
     ✅ We improved ROI while increasing marketing spend which is a positive business result.
     </div>""",unsafe_allow_html=True)
 
-
-#SECOND PLOT
-fig2 = make_subplots(rows=1,cols=2)
-fig2.add_trace(go.Scatter(x=df.index,y=df['Total_Spend_CPM'],marker={'color':'#008000'},showlegend=False),row=1,col=1)
-fig2.update_xaxes(title_text="Date",row=1,col=1)
-fig2.update_yaxes(title_text="Click Per Impression",row=1,col=1)
-fig2.add_trace(go.Scatter(x=df.index,y=df['Total_Spend_CPC'],marker={'color':'#008000'},showlegend=False),row=1,col=2)
-fig2.update_xaxes(title_text="Date",row=1,col=2)
-fig2.update_yaxes(title_text="Cost Per Click",row=1,col=2)
-with tab2:
-    st.subheader("Media Buying")
-    st.plotly_chart(fig2)
-    st.markdown("""
-    <div style="text-align: justify;">
-    ✅ We can see that during season Click Per Impressions’ are increasing → competition is rising
-
-    ✅ BUT! we can see that Cost Per Clicks in 2023 dropped during high season meaning we did a good job in terms of marketing strategy/activity.
-    </div>""",unsafe_allow_html=True)
-
-
 #THIRD PLOT
 fig3 = make_subplots(rows=1,cols=2)
 fig3.add_trace(go.Scatter(x=df['tt_impressions'],y=df['total_sales'],name='TikTok',mode='markers',marker={'color':'#FF7F50'}),row=1,col=1)
@@ -111,8 +91,8 @@ fig3.update_xaxes(title_text="Clicks",row=1,col=2)
 fig3.update_yaxes(title_text="Total Sales",row=1,col=2)
 
 fig3.update_traces(marker_size=6,marker_line=dict(width=1, color='black'))
-with tab3:
-    st.subheader("Impressions/Clicks vs Total Sales")
+with tab2:
+    st.subheader("Total Sales vs Impressions/Clicks")
     st.plotly_chart(fig3)
     st.markdown("""
     <div style="text-align: justify;">
@@ -126,6 +106,43 @@ with tab3:
 
     ✅ For clicks TikTok is showing a difference when comparing Impressions with Clicks to sales. The clicks generated do not seem to result in direct sales.
     </div>""",unsafe_allow_html=True)
+
+#SIXTH PLOT
+x=df.groupby(df.index.dayofweek)["ROI"].mean()
+fig6 = make_subplots()
+fig6.update_layout(showlegend=False)
+fig6.add_trace(go.Scatter(x=x.index.map({0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'}),y=x,mode='lines',marker={'color':'#008000'}))
+fig6.update_xaxes(title_text="Weekday")
+fig6.update_yaxes(title_text="Average ROI")
+with tab3:
+    st.subheader("Average ROI vs Weekday")
+    st.plotly_chart(fig6)
+    st.markdown("""
+    <div style="text-align: justify;">
+    ✅ The graphs clearly reveal that our average return on investment (ROI) is at its lowest on Fridays and Saturdays, suggesting these days witness the weakest sales performance throughout the week.
+
+    ✅ To address this, we should delve into the underlying reasons behind this trend and consider tailored marketing strategies to potentially boost sales during these weekend days.
+    </div>""",unsafe_allow_html=True)
+
+
+#SECOND PLOT
+fig2 = make_subplots(rows=1,cols=2)
+fig2.add_trace(go.Scatter(x=df.index,y=df['Total_Spend_CPM'],marker={'color':'#008000'},showlegend=False),row=1,col=1)
+fig2.update_xaxes(title_text="Date",row=1,col=1)
+fig2.update_yaxes(title_text="Cost Impressions",row=1,col=1)
+fig2.add_trace(go.Scatter(x=df.index,y=df['Total_Spend_CPC'],marker={'color':'#008000'},showlegend=False),row=1,col=2)
+fig2.update_xaxes(title_text="Date",row=1,col=2)
+fig2.update_yaxes(title_text="Cost Per Click",row=1,col=2)
+with tab4:
+    st.subheader("Media Buying")
+    st.plotly_chart(fig2)
+    st.markdown("""
+    <div style="text-align: justify;">
+    ✅ We can see that during season Click Per Impressions’ are increasing → competition is rising
+
+    ✅ BUT! we can see that Cost Per Clicks in 2023 dropped during high season meaning we did a good job in terms of marketing strategy/activity.
+    </div>""",unsafe_allow_html=True)
+
 
 
 #FORTH PLOT
@@ -152,7 +169,7 @@ fig4_3=go.Figure(data=go.Heatmap(z=df_corr3, colorscale='blues',x=labels3,y=labe
 
 fig4_3.layout.height = 600
 fig4_3.layout.width = 600
-with tab4:
+with tab5:
     st.subheader('Social Media Impressions Corr To Sale')
     st.plotly_chart(fig4_1)
     st.subheader("Social Media Clicks Corr To Sale")
@@ -172,37 +189,18 @@ with tab4:
     ✅ Lastly we see that Facebook costs in particular is effecting the ROI which may tells us we should watch out with spending too much on Facebook. Trying to find a better sweet spot. Of course this makes sense as it is the highest spending channel.
     </div>""",unsafe_allow_html=True)
 
-# ##FIFTH PLOT
-# fig5 = make_subplots(rows=1,cols=2)
-# fig5.add_trace(go.Bar(x=df_avg,y=df['% Clicks'], name=, marker={'color':'#008000'},orientation='v'),row=1,col=1)
-# fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=1)
-# fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=1)
-# fig3.update_xaxes(title_text="Amount",row=1,col=1)
-# fig3.update_yaxes(title_text="Percentage Value",row=1,col=1)
-# fig5.add_trace(go.Bar(x=df_avg_cpc_cpm,marker={'color':'#069AF3'}, orientation='v'),row=1,col=2)
-# fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=2)
-# fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=2)
-# fig3.update_xaxes(title_text="Company",row=1,col=2)
-# fig3.update_yaxes(title_text="Average Value",row=1,col=2)
-# with tab5:
-#     st.subheader("Percentage From Total/Average CPC & CPM")
-#     st.plotly_chart(fig5)
-# #fig.update_layout(barmode='group')
-
-
-#SIXTH PLOT
-x=df.groupby(df.index.dayofweek)["ROI"].mean()
-fig6 = make_subplots()
-fig6.update_layout(showlegend=False)
-fig6.add_trace(go.Scatter(x=x.index.map({0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'}),y=x,mode='lines',marker={'color':'#008000'}))
-fig6.update_xaxes(title_text="Weekday")
-fig6.update_yaxes(title_text="Average ROI")
+#FIFTH PLOT
+fig5 = make_subplots(rows=1,cols=2)
+fig5.add_trace(go.Bar(x=df_avg['Company'],y=df_avg['% Clicks'], name='% Clicks', marker={'color':'#008000'},orientation='v'),row=1,col=1)
+fig5.add_trace(go.Bar(x=df_avg['Company'], y=df_avg['% Spend'], name='% Spends', marker={'color':'#FF7F50'},orientation='v'),row=1,col=1)
+fig5.add_trace(go.Bar(x=df_avg['Company'], y=df_avg['% Impressions'], name='% Impressions', marker={'color':'#069AF3'},orientation='v'),row=1,col=1)
+#fig5.update_layout(legend=dict(x=0.5))
+fig5.update_xaxes(title_text="Company",row=1,col=1)
+fig5.update_yaxes(title_text="% Value",row=1,col=1)
+fig5.add_trace(go.Bar(x=df_avg_cpc_cpm['Company'],y=df_avg_cpc_cpm['Avg CPC'], name='Avg CPC', marker={'color':'#FF7F50'},orientation='v'),row=1,col=2)
+fig5.add_trace(go.Bar(x=df_avg_cpc_cpm['Company'], y=df_avg_cpc_cpm['Avg CPM'], name='Avg CPM', marker={'color':'#008000'},orientation='v'),row=1,col=2)
+fig5.update_xaxes(title_text="Company",row=1,col=2)
+fig5.update_yaxes(title_text="Average Value",row=1,col=2)
 with tab6:
-    st.subheader("Average ROI vs Weekday")
-    st.plotly_chart(fig6)
-    st.markdown("""
-    <div style="text-align: justify;">
-    ✅ The graphs clearly reveal that our average return on investment (ROI) is at its lowest on Fridays and Saturdays, suggesting these days witness the weakest sales performance throughout the week.
-
-    ✅ To address this, we should delve into the underlying reasons behind this trend and consider tailored marketing strategies to potentially boost sales during these weekend days.
-    </div>""",unsafe_allow_html=True)
+    st.subheader("Comparing Platforms")
+    st.plotly_chart(fig5)
