@@ -9,7 +9,7 @@ import datetime
 #Prediction
 st.header('Best Fit for Your Advertisements Budget', divider='green')
 budget = st.number_input('Insert your budget for advertising')
-date = st.date_input("Insert your prefer date for prediction", datetime.date(2019, 7, 6))
+date = st.date_input("Insert your prefer date for prediction", datetime.date(2023, 9, 8))
 st.write(f"""The current budget for advertising is: {round(budget,2)}, and date is: {date}""")
 
 url='https://mmm-lewagon-iainnplz7a-ew.a.run.app/budgetdivider'
@@ -23,6 +23,7 @@ if st.button('Best Fit'):
         st.success(f" Google Budget= {round(response['Google Budget'],2)}!")
         st.success(f" Facebook Budget= {round(response['Facebook Budget'],2)} !")
         st.success(f" Tiktok Budget= {round(response['Tiktok Budget'],2)} !")
+        st.success(f" Total Clicks= {round(response['Total_clicks'],2)} !")
         labels = ['Google', 'Facebook', 'Tiktok']
         values = [round(response['Google Budget'],2), round(response['Facebook Budget'],2), round(response['Tiktok Budget'],2)]
         colors=['#008000','#069AF3','#FF7F50']
