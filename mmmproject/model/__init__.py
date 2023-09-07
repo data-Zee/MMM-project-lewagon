@@ -1,0 +1,1 @@
+from mmmproject.model.weekendclass import AddWeekendsTransformer
