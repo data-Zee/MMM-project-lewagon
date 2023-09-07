@@ -38,19 +38,32 @@ df_monthly = df.resample('M').sum()
 
 
 st.header('General Overview', divider='green')
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Monthly Sales/Spend","Media Buying","Impressions/Clicks vs Total Sales","Media Impressions/Clicks/Costs Corr To Sale","new","Average ROI vs Weekday"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Monthly Sales/Spend/ROI","Media Buying","Impressions/Clicks vs Total Sales","Media Impressions/Clicks/Costs Corr To Sale","new","Average ROI vs Weekday"])
 
 #FIRST PLOT
-fig1 = make_subplots()
-fig1.add_trace(go.Scatter(x=df.index,y=df['Total_Spend'],name='Total Spend',marker={'color':'#FF7F50'}))
-fig1.add_trace(go.Scatter(x=df.index,y=df['total_sales'], name='Total Sales',marker={'color':'#008000'}))
+fig1_1 = make_subplots()
+fig1_1.add_trace(go.Scatter(x=df.index,y=df['Total_Spend'],name='Total Spend',marker={'color':'#FF7F50'}))
+fig1_1.add_trace(go.Scatter(x=df.index,y=df['total_sales'], name='Total Sales',marker={'color':'#008000'}))
 # Set x-axis title
-fig1.update_xaxes(title_text="Date")
+fig1_1.update_xaxes(title_text="Date")
 # Set y-axes titles
-fig1.update_yaxes(title_text="Amount ( € )")
+fig1_1.update_yaxes(title_text="Amount ( € )")
+
+
+fig1_2 = make_subplots()
+fig1_2.add_trace(go.Scatter(x=df.index,y=df['ROI'], name='ROI',marker={'color':'#008000'}))
+# Set x-axis title
+fig1_2.update_xaxes(title_text="Date")
+# Set y-axes titles
+fig1_2.update_yaxes(title_text="ROI")
+fig1_2.update_layout(xaxis_range=['2022-02-01','2023-08-24'])
+fig1_2.update_layout(yaxis_range=[0,15])
+
 with tab1:
     st.subheader("Monthly Sales/Spend")
-    st.plotly_chart(fig1)
+    st.plotly_chart(fig1_1)
+    st.subheader("Return On Investment")
+    st.plotly_chart(fig1_2)
     st.markdown("""
     <div style="text-align: justify;">
     ✅ July (summer) seasonality is clearly visible.
@@ -159,17 +172,22 @@ with tab4:
     ✅ Lastly we see that Facebook costs in particular is effecting the ROI which may tells us we should watch out with spending too much on Facebook. Trying to find a better sweet spot. Of course this makes sense as it is the highest spending channel.
     </div>""",unsafe_allow_html=True)
 
-#FIFTH PLOT
-fig5 = make_subplots(rows=1,cols=2)
-fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=1)
-fig3.update_xaxes(title_text="Amount",row=1,col=1)
-fig3.update_yaxes(title_text="Percentage Value",row=1,col=1)
-fig5.add_trace(go.Bar(x=df_avg_cpc_cpm,marker={'color':'#069AF3'}, orientation='v'),row=1,col=2)
-fig3.update_xaxes(title_text="Company",row=1,col=2)
-fig3.update_yaxes(title_text="Average Value",row=1,col=2)
-with tab5:
-    st.subheader("Percentage From Total/Average CPC & CPM")
-    st.plotly_chart(fig5)
+# ##FIFTH PLOT
+# fig5 = make_subplots(rows=1,cols=2)
+# fig5.add_trace(go.Bar(x=df_avg,y=df['% Clicks'], name=, marker={'color':'#008000'},orientation='v'),row=1,col=1)
+# fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=1)
+# fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=1)
+# fig3.update_xaxes(title_text="Amount",row=1,col=1)
+# fig3.update_yaxes(title_text="Percentage Value",row=1,col=1)
+# fig5.add_trace(go.Bar(x=df_avg_cpc_cpm,marker={'color':'#069AF3'}, orientation='v'),row=1,col=2)
+# fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=2)
+# fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=2)
+# fig3.update_xaxes(title_text="Company",row=1,col=2)
+# fig3.update_yaxes(title_text="Average Value",row=1,col=2)
+# with tab5:
+#     st.subheader("Percentage From Total/Average CPC & CPM")
+#     st.plotly_chart(fig5)
+# #fig.update_layout(barmode='group')
 
 
 #SIXTH PLOT
