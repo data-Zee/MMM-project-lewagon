@@ -159,25 +159,18 @@ with tab4:
     ✅ Lastly we see that Facebook costs in particular is effecting the ROI which may tells us we should watch out with spending too much on Facebook. Trying to find a better sweet spot. Of course this makes sense as it is the highest spending channel.
     </div>""",unsafe_allow_html=True)
 
-# #FIFTH PLOT
-# fig5 = make_subplots(rows=1,cols=2)
-# fig5.add_trace(go.Scatter(data=df_avg,marker={'color':'#FF7F50'}),row=1,col=1)
+#FIFTH PLOT
+fig5 = make_subplots(rows=1,cols=2)
+fig5.add_trace(go.Bar(x=df_avg,marker={'color':'#008000'},orientation='v'),row=1,col=1)
+fig3.update_xaxes(title_text="Amount",row=1,col=1)
+fig3.update_yaxes(title_text="Percentage Value",row=1,col=1)
+fig5.add_trace(go.Bar(x=df_avg_cpc_cpm,marker={'color':'#069AF3'}, orientation='v'),row=1,col=2)
+fig3.update_xaxes(title_text="Company",row=1,col=2)
+fig3.update_yaxes(title_text="Average Value",row=1,col=2)
+with tab5:
+    st.subheader("Percentage From Total/Average CPC & CPM")
+    st.plotly_chart(fig5)
 
-# fig5.add_trace(go.Scatter(data=df_avg_cpc_cpm,marker={'color':'#069AF3'}),row=1,col=2)
-# with tab5:
-#     st.subheader("")
-#     st.plotly_chart(fig5)
-
-# df.plot(kind='bar', rot=0, figsize=(10, 6))
-# plt.title('% From Total')
-# plt.ylabel('% Value')
-
-# # Create a bar plot for both Avg CPC and Avg CPM
-# df_avg_cpc_cpm.plot(kind='bar', rot=0, figsize=(10, 6))
-# plt.title('Average CPC & CPM')
-# plt.xlabel('Company')
-# plt.ylabel('Average Value')
-# plt.show()
 
 #SIXTH PLOT
 x=df.groupby(df.index.dayofweek)["ROI"].mean()
