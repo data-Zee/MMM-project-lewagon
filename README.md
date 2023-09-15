@@ -1,10 +1,8 @@
 # Marketing Mix Model:
 
-🤓 **Project:**    Final project week Le Wagon data science bootcamp.
-##
-🎯 **Goal:**       Analyzing e-commerce shop sales and its marketing data. Data analyse and implemention of statistical modeling to improve marketing efficiency.
-##
-🚨 **Conclusion:** Need more data to have higher model accuracy in order to predict shop sales and get better model fit (R2= 0.4). Due to this low accuracy we switched to predicting link clicks (direct response from digital ads) which gave us higher model accuracy (R2= 0.88).
+🤓 **Project:**    Final project week Le Wagon data science bootcamp. <br />
+🎯 **Goal:**       Analyzing e-commerce shop sales and its marketing data. Data analyse and implemention of statistical modeling to improve marketing efficiency. <br />
+🚨 **Conclusion:** Need more data to have higher model accuracy in order to predict shop sales and get better model fit (R2= 0.4). Due to this low accuracy we switched to predicting link clicks (direct response from digital ads) which gave us higher model accuracy (R2= 0.88). <br />
 
 ## Task Overview:
 
